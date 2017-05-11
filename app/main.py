@@ -3,8 +3,8 @@ import cherrypy
 import config
 
 WEBHOOK_HOST = '%s' %(config.WEBHOOK_URL)
-WEBHOOK_PORT = 443
-WEBHOOK_LISTEN = '0.0.0.0'
+WEBHOOK_PORT = 5000
+WEBHOOK_LISTEN = '%s' %(config.WEBHOOK_URL)
 
 
 WEBHOOK_SSL_CERT = './webhook_cert.pem'
