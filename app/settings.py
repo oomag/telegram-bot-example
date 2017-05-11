@@ -1,5 +1,5 @@
 import telegram
 
-BOT_TOKEN = '268737221:AAGdNFIz7Bi6lbXx2IZUMIosQnU9_fo77Ug'
-WEBHOOK_URL = 'https://mytelegrambot.dokkurapp.com/HOOK'
+BOT_TOKEN = '374526741:AAGzUUxN2t9SkMXLHeA2YXuRsQf78cYGyhk'
+WEBHOOK_URL = 'https://mybots1.dokkurapp.com/HOOK'
 bot = telegram.Bot(token=BOT_TOKEN)
