@@ -4,10 +4,10 @@ from ..settings import bot
 
 class Chat(object):
 
-    def __init__(self, chat_id, text=''):
-        self.chat_id = chat_id
-        self.text = text
+    @bot.message_handler(commands=['start', 'help'])
+    def send_welcome(message):
+        bot.reply_to(message, "Howdy, how are you doing?")
 
-    # main process method
-    def process(self):
-        bot.sendMessage(chat_id=self.chat_id, text=u"> {}".format(self.text))
+    @bot.message_handler(func=lambda message: True)
+    def echo_all(message):
+        bot.reply_to(message, message.text)
