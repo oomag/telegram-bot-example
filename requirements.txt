@@ -1,3 +1,10 @@
 certifi==2016.2.28
-telebot==0.0.3
-cherrypy
+falcon
+future
+gunicorn
+peewee
+python-mimeparse
+python-telegram-bot
+six
+urllib3
+wheel
