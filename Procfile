@@ -1,1 +1,1 @@
-web:  --workers 4
+web:  app.main
