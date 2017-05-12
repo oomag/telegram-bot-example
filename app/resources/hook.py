@@ -2,6 +2,7 @@ import telebot
 import json
 import traceback
 from ..classes import Chat
+from ..settings import bot
 
 class HookResource(object):
     def on_post(self, req, resp):
@@ -10,7 +11,7 @@ class HookResource(object):
             body_decoded = body.decode("utf-8")
             json_body = json.loads(body_decoded)
 
-            update = telegram.Update.de_json(json_body)
+            update = bot.get_updates(json_body)
 
             chat_id = update.message.chat.id
             text = update.message.text
