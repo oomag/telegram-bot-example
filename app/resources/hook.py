@@ -13,7 +13,7 @@ class HookResource(object):
 
             update = bot.get_updates(json_body)
 
-            chat_id = update.message.chat.id
+            chat_id = update.chat_id
             text = update.message.text
 
             chat = Chat(chat_id, text)
