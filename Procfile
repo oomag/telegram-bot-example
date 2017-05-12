@@ -1,1 +1,2 @@
-web: sudo  ./app/main.py --workers 4
+sudo my-app scale web=1
+web:  ./app/main.py --workers 4
