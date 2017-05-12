@@ -1,4 +1,4 @@
-import telegram
+import telebot
 import json
 import traceback
 from ..classes import Chat
