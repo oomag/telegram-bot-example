@@ -1,1 +1,1 @@
-web:  ./app/main.py --workers 4
+web: sudo  ./app/main.py --workers 4
