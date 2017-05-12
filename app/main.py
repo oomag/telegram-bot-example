@@ -23,7 +23,7 @@ def getMessage():
 def webhook():
     bot.remove_webhook()
     bot.set_webhook(url="https://mybots1.dokkurapp.com/bot")
-return "!", 200
+
 
 server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
 server = Flask(__name__)
