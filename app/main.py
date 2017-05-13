@@ -47,4 +47,4 @@ cherrypy.config.update({
 })
 
 
-cherrypy.quickstart(WebhookServer(), cherryconf.WEBHOOK_URL_PATH, {'/': {}})
+cherrypy.quickstart(WebhookServer(), cherryconf.WEBHOOK_URL_PATH, {'/app': {}})
