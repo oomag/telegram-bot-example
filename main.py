@@ -14,7 +14,7 @@ WEBHOOK_SSL_PRIV = './webhook_pkey.pem'  # Путь к приватному кл
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (token)
 
-bot = telebot.TeleBot(config.token)
+bot = telebot.TeleBot(token)
 
 # Наш вебхук-сервер
 class WebhookServer(object):
