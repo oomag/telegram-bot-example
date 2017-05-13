@@ -2,12 +2,12 @@ import cherrypy
 import os
 import telebot
 
-token = "374526741:AAGzUUxN2t9SkMXLHeA2YXuRsQf78cYGyhk"
+token = "374526741:AAGJGYXMJ5bFUZfXsL_G1bNFP3CcRG94zks"
 bot = telebot.TeleBot(token)
 class StringMaker(object):
     @cherrypy.expose
     def index(self):
-        token = "374526741:AAGzUUxN2t9SkMXLHeA2YXuRsQf78cYGyhk"
+        token = "374526741:AAGJGYXMJ5bFUZfXsL_G1bNFP3CcRG94zks"
         bot = telebot.TeleBot(token)
         @bot.message_handler(content_types=["text"])
         def handle_text(message):
