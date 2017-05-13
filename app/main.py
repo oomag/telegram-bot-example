@@ -1,9 +1,12 @@
+#!/usr/bin/python3.4
+# -*- coding: utf-8 -*-
 import telebot
 import cherrypy
 import config
 import cherryconf
 
 bot = telebot.TeleBot(config.token)
+
 
 
 class WebhookServer(object):
@@ -21,9 +24,12 @@ class WebhookServer(object):
         else:
             raise cherrypy.HTTPError(403)
 
+
+
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
     bot.reply_to(message, message.text)
+
 
 bot.remove_webhook()
 
