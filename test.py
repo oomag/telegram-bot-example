@@ -31,10 +31,7 @@ def echo_message(message):
     bot.reply_to(message, message.text)
 
 
-bot.remove_webhook()
 
-
-bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH)
 
 cherrypy.config.update({
     'server.socket_host': '0.0.0.0',
