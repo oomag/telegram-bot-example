@@ -13,11 +13,11 @@ bot = telebot.TeleBot(token)
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message, 'Hello, ' + message.from_user.first_name)
+    bot.send_message(message.chat.id, 'Hello, ' + message.from_user.first_name)
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
-    bot.send_message(message, message.text)
+    bot.send_message(message.chat.id, message.text)
 
 @server.route("/bot", methods=['POST'])
 def getMessage():
@@ -28,7 +28,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url = "https://myboot1.herokuapp.com/bot")
+    bot.set_webhook(url="https://myboot1.herokuapp.com/bot")
     return "!", 200
 
 
