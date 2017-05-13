@@ -55,4 +55,4 @@ cherrypy.config.update({
 })
 
  # Собственно, запуск!
-cherrypy.quickstart(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
+cherrypy.quickstart(WebhookServer(), WEBHOOK_URL_PATH, {'/bot': {}})
