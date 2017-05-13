@@ -1,1 +1,1 @@
-bot: python3 test2.py
+web: python3 test.py
