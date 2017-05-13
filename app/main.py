@@ -5,7 +5,7 @@ import cherryconf
 
 bot = telebot.TeleBot(config.token)
 
-# Наш вебхук-сервер
+
 class WebhookServer(object):
     @cherrypy.expose
     def index(self):
@@ -15,7 +15,7 @@ class WebhookServer(object):
             length = int(cherrypy.request.headers['content-length'])
             json_string = cherrypy.request.body.read(length).decode("utf-8")
             update = telebot.types.Update.de_json(json_string)
-            # Эта функция обеспечивает проверку входящего сообщения
+
             bot.process_new_updates([update])
             return ''
         else:
@@ -27,11 +27,11 @@ def echo_message(message):
 
 bot.remove_webhook()
 
- # Ставим заново вебхук
+
 bot.set_webhook(url=cherryconf.WEBHOOK_URL_BASE + cherryconf.WEBHOOK_URL_PATH,
                 certificate=open(cherryconf.WEBHOOK_SSL_CERT, 'r'))
 
-# Указываем настройки сервера CherryPy
+
 cherrypy.config.update({
     'server.socket_host': cherryconf.WEBHOOK_LISTEN,
     'server.socket_port': cherryconf.WEBHOOK_PORT,
@@ -40,5 +40,5 @@ cherrypy.config.update({
     'server.ssl_private_key': cherryconf.WEBHOOK_SSL_PRIV
 })
 
- # Собственно, запуск!
-cherrypy.quickstart(WebhookServer(), cherryconf.WEBHOOK_URL_PATH, {'/': {}})
+
+cherrypy.quickstart(WebhookServer(), cherryconf.WEBHOOK_URL_PATH, {'/app': {}})
