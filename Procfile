@@ -1,1 +1,1 @@
-python3 /app/main.py
+bot: python3 /app/main.py
