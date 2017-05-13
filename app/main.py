@@ -1,29 +1,44 @@
 import telebot
-import os
-from flask import Flask, request
+import cherrypy
+import config
+import cherryconf
 
-bot = telebot.TeleBot('374526741:AAGzUUxN2t9SkMXLHeA2YXuRsQf78cYGyhk')
+bot = telebot.TeleBot(config.token)
 
-server = Flask(__name__)
-
-@bot.message_handler(commands=['start'])
-def start(message):
-    bot.reply_to(message, 'Hello, ' + message.from_user.first_name)
+# Наш вебхук-сервер
+class WebhookServer(object):
+    @cherrypy.expose
+    def index(self):
+        if 'content-length' in cherrypy.request.headers and \
+                        'content-type' in cherrypy.request.headers and \
+                        cherrypy.request.headers['content-type'] == 'application/json':
+            length = int(cherrypy.request.headers['content-length'])
+            json_string = cherrypy.request.body.read(length).decode("utf-8")
+            update = telebot.types.Update.de_json(json_string)
+            # Эта функция обеспечивает проверку входящего сообщения
+            bot.process_new_updates([update])
+            return ''
+        else:
+            raise cherrypy.HTTPError(403)
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
     bot.reply_to(message, message.text)
 
-@server.route("/bot", methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
+bot.remove_webhook()
 
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url="https://myboot1.herokuapp.com/app")
-    return "!", 200
+ # Ставим заново вебхук
+bot.set_webhook(url=cherryconf.WEBHOOK_URL_BASE + cherryconf.WEBHOOK_URL_PATH,
+                certificate=open(cherryconf.WEBHOOK_SSL_CERT, 'r'))
 
-server.run(host="0.0.0.0", port=os.environ.get('PORT', 5000))
-server = Flask(__name__)
+# Указываем настройки сервера CherryPy
+cherrypy.config.update({
+    'server.socket_host': cherryconf.WEBHOOK_LISTEN,
+    'server.socket_port': cherryconf.WEBHOOK_PORT,
+    'server.ssl_module': 'builtin',
+    'server.ssl_certificate': cherryconf.WEBHOOK_SSL_CERT,
+    'server.ssl_private_key': cherryconf.WEBHOOK_SSL_PRIV
+})
+
+ # Собственно, запуск!
+cherrypy.quickstart(WebhookServer(), cherryconf.WEBHOOK_URL_PATH, {'/': {}})
