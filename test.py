@@ -15,6 +15,8 @@ bot = telebot.TeleBot(token)
 def handle_text(message):
     bot.send_message(message.from_user.id, message.text)
 
+    bot.polling(none_stop=True, interval=0)
+
 @server.route("/bot", methods=['POST'])
 def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
