@@ -1,1 +1,1 @@
-web: ./app/main.py
+python3 /app/main.py
