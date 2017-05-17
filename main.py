@@ -32,4 +32,4 @@ cherrypy.config.update({
 })
 
 
-cherrypy.quickstart(WebhookServer(), "https://myboot1.herokuapp.com/" + token, {'/bot': {}})
+cherrypy.quickstart(WebhookServer(), "https://myboot1.herokuapp.com/" + token)
