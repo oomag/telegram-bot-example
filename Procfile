@@ -1,1 +1,1 @@
-web: gunicorn app.main:api --workers 4
+web: python3 main.py
