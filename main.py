@@ -23,7 +23,7 @@ bot.remove_webhook()
 time.sleep(5)
 
 
-bot.set_webhook("https://bigrussianbot.herokuapp.com/" + token)
+bot.set_webhook("https://myboot1.herokuapp.com/" + token)
 
 
 cherrypy.config.update({
@@ -32,4 +32,4 @@ cherrypy.config.update({
 })
 
 
-cherrypy.quickstart(WebhookServer(), "https://bigrussianbot.herokuapp.com/" + token, {'/bot': {}})
+cherrypy.quickstart(WebhookServer(), "https://myboot1.herokuapp.com/" + token, {'/bot': {}})
